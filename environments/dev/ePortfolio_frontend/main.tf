@@ -1,17 +1,3 @@
-# Configure the Azure provider
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0.0"
-    }
-  }
-  required_version = ">= 0.14.9"
-}
-provider "azurerm" {
-  features {}
-}
-
 # Generate a random integer to create a globally unique name
 resource "random_integer" "ri" {
   min = 10000
@@ -45,12 +31,7 @@ resource "azurerm_linux_web_app" "webapp" {
   }
 }
 
-#  Deploy code from a public GitHub repo
-# resource  "azurerm_source_control_token"  "sourcecontroltoken" {
-#   type =  "GitHub"
-#   token =  "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"
-# }
-
+# #  Deploy code from a public GitHub repo
 resource "azurerm_app_service_source_control" "sourcecontrol" {
   app_id             = azurerm_linux_web_app.webapp.id
   repo_url           = "https://github.com/OluOrija/nodejs-docs-hello-world.git"
